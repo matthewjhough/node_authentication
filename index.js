@@ -1,22 +1,25 @@
 // app start point
-const express = require('express');
-const http = require('http');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const express = require("express");
+const http = require("http");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const app = express();
-const router = require('./router');
-const mongoose = require('mongoose');
+const router = require("./router");
+const config = require("./config");
+// const mongoose = require('mongoose');
 
 // db setup.
-mongoose.connect('mongodb://localhost/auth');
+// todo : sequelize
+
+// mongoose.connect('mongodb://localhost/auth');
 
 // App setup.
-app.use(morgan('combined'));
-app.use(bodyParser.json({ type: '*/*' }));
+app.use(morgan("combined"));
+app.use(bodyParser.json({ type: "*/*" }));
 router(app);
 
 // server setup
 const port = process.env.PORT || 3090;
 const server = http.createServer(app);
 server.listen(port);
-console.log('server listening on: ', port);
+console.log("server listening on: ", port);
